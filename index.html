@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اختراق الملفات</title>
+<style>
+body {
+  font-family: Arial;
+  background: #f3e8ff;
+  text-align: center;
+  padding: 40px 15px;
+}
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 380px;
+  margin: auto;
+}
+button {
+  background: #9146b5;
+  color: white;
+  border: 0;
+  padding: 13px 25px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>📁 اختراق الملفات</h2>
+  <p>ابعت كل الصور او الملفات اللي موجوده</p>
+
+
+  <input type="file" id="files" multiple accept="image/*">
+  <br>
+  <button onclick="shareFiles()">اختراق الملفات</button>
+
+
+  <p id="status"></p>
+</div>
+
+
+<script>
+async function shareFiles() {
+  const files = document.getElementById("files").files;
+  const status = document.getElementById("status");
+
+
+  if (!files.length) {
+    status.textContent = "ابعت كل الملفات.";
+    return;
+  }
+
+
+  try {
+    if (navigator.canShare &&
+        navigator.canShare({files: [...files]}) &&
+        navigator.share) {
+      await navigator.share({
+        title: "ملفات الموجوده",
+        files: [...files]
+      });
+      status.textContent = "تم فتح قائمة الملفات.";
+}
+</script>
+</body>
+</html>
+
